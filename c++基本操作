@@ -1,0 +1,95 @@
+//传址by reference,传值 by value. 
+ #include<string>
+ #include<iostream>
+ #include<vector>
+ using namespace std;
+ void display (vector<int> vec)
+ {for(int ix=0;ix<vec.size();++ix)
+   cout<<vec[ix]<<' ';
+   cout<<endl;  
+}
+void swap(int val1,int val2)
+{ 
+  int temp=val1;
+  val1=val2;
+  val2=temp;
+}
+void bubble_sort(vector<int> vec)
+{
+	for(int ix=0;ix<vec.size();++ix)
+	   for(int jx=ix+1;jx<vec.sizec();++jx)
+	      if(vec[ix]>vec[jx])
+	        swap(vec[ix],vec[jx]);
+		
+}
+int main()
+{ int ia[8]={8,34,3,13,1,21,5,2};
+  vector<int> vec(ia,ia+8);
+  cout<<"vector before sort:";
+  display(vec);
+  bubble_sort(vec);
+  cout<<"vector after sort: ";
+  display(vec);
+}
+
+//上述程序改为by reference;
+void bubble_sort(vector<int> &vec); 
+//一般情况加上const to reference;为的是便于阅读
+void bubble_sort(const vector<int> &vec);
+
+//reference 也可以改为 pointer
+void display (const vector<int> *vec)
+{
+	if(!vec){
+		cout<<"display():the vector pointer is 0\n";
+		return ;
+	}
+	for(int ix=0;ix<vec->size();++ix)
+	   cout<<(*vec)[ix]<<" ";
+	cout<<endl;
+ } 
+ int main()
+ {
+ }
+ //指针注意：
+ int *p=0;//空指针。
+ 
+ //作用域及其范围
+ vector<int> fibon_seq(int size)
+ {
+ 	if(size<=0||size>1024)
+ 	{
+ 		cerr<<"Warning:fibon_seq():"                    //cerr一种不经缓冲的输出。。 
+ 		    <<size<<"not supported--resetting to 8\n";  
+ 		    size=8;
+	 }
+  } 
+  vector<int> elems(size){
+  for(int ix=0;ix<size;++ix)
+     if(ix==0||ix==1)
+       elems[ix]=1;
+       else
+       elems[ix]=elems[ix-1]+elems[ix-2];
+       
+    return elems;   
+}
+//几个名词：file scope,local scope,static extent;
+
+"动态内存管理” 
+//dynamic extent --程序员自行管理
+//用new表达式从heap划分出一段区域
+new Type://或new Type(initial_value);
+
+int *pi;
+pi=new int; 
+//pi=new int(1024); object初始化为了1024。 
+
+//从heap中分配数组
+int *pia=new int[24];//pia--第一个元素的地址。 
+//delete 来释放dynamic extent
+delete pi //释放pi所指object
+delete [] pia //删除array 中的所有elem; 
+ ///如果heap分配的区域之后不用delete释放内存,会造成 memory leak;
+ 
+ 
+ "文件的读写" 
